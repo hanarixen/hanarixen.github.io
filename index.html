@@ -29,6 +29,7 @@ a,a *{-webkit-touch-callout:none !important;-webkit-user-select:none !important;
   --blue:#38bdf8;
   --green:#34d399;
   --yellow:#fbbf24;
+  --red:#ef4444;
   --glow:rgba(167,139,250,.5);
   --ease:.3s cubic-bezier(.4,0,.2,1)
 }
@@ -775,6 +776,7 @@ html[data-theme=light] .card::before{
 .card-bar.blue{background:var(--blue)}
 .card-bar.green{background:var(--green)}
 .card-bar.yellow{background:var(--yellow)}
+.card-bar.red{background:var(--red)}
 
 .card-icon{
   width:48px;
@@ -848,6 +850,12 @@ html[data-theme=light] .card-icon{
   background:rgba(255,95,162,.15);
   color:#ff5fa2;
   border:1px solid rgba(255,95,162,.3)
+}
+
+.badge-danger{
+  background:rgba(239,68,68,.15);
+  color:#ef4444;
+  border:1px solid rgba(239,68,68,.35)
 }
 
 .card-arrow{
@@ -927,6 +935,170 @@ html[data-theme=light] .cta{
 }
 
 .footer-links a:hover{color:var(--pink)}
+
+/* ========== TROLL MODAL ========== */
+.troll-modal{
+  position:fixed;
+  inset:0;
+  z-index:999;
+  background:rgba(0,0,0,.85);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  opacity:0;
+  transition:opacity .3s ease
+}
+.troll-modal.show{display:flex;opacity:1}
+.troll-box{
+  position:relative;
+  width:100%;
+  max-width:420px;
+  background:linear-gradient(180deg,#16161f,#0f0f15);
+  border:1px solid rgba(239,68,68,.35);
+  border-radius:22px;
+  padding:26px 22px 22px;
+  text-align:center;
+  box-shadow:0 20px 60px rgba(239,68,68,.35),inset 0 1px 0 rgba(255,255,255,.06);
+  animation:boxIn .35s cubic-bezier(.4,0,.2,1)
+}
+@keyframes boxIn{
+  from{opacity:0;transform:scale(.92) translateY(10px)}
+  to{opacity:1;transform:scale(1) translateY(0)}
+}
+.troll-close{
+  position:absolute;
+  top:12px;
+  right:12px;
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);
+  color:#a1a1b0;
+  font-size:14px;
+  cursor:pointer;
+  display:grid;
+  place-items:center;
+  transition:.25s
+}
+.troll-close:hover{color:#ef4444;border-color:#ef4444;background:rgba(239,68,68,.1)}
+.troll-icon{
+  width:64px;
+  height:64px;
+  margin:0 auto 14px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(239,68,68,.25),rgba(239,68,68,.05));
+  border:2px solid rgba(239,68,68,.4);
+  display:grid;
+  place-items:center;
+  font-size:32px;
+  animation:iconPulse 2s ease-in-out infinite
+}
+@keyframes iconPulse{
+  0%,100%{transform:scale(1);box-shadow:0 0 20px rgba(239,68,68,.3)}
+  50%{transform:scale(1.05);box-shadow:0 0 32px rgba(239,68,68,.55)}
+}
+.troll-title{
+  font-size:19px;
+  font-weight:800;
+  color:#ef4444;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  margin-bottom:14px;
+  text-shadow:0 0 20px rgba(239,68,68,.5)
+}
+.troll-text{
+  font-size:13px;
+  line-height:1.7;
+  color:#a1a1b0;
+  text-align:left;
+  background:rgba(239,68,68,.05);
+  border-left:3px solid #ef4444;
+  padding:12px 14px;
+  border-radius:8px;
+  margin-bottom:18px
+}
+.troll-text b{color:#fafafa}
+.troll-check{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  padding:13px 14px;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:12px;
+  margin-bottom:16px;
+  cursor:pointer;
+  transition:.25s;
+  text-align:left
+}
+.troll-check:hover{border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.05)}
+.troll-check input{
+  width:18px;
+  height:18px;
+  margin-top:1px;
+  accent-color:#ef4444;
+  cursor:pointer;
+  flex-shrink:0
+}
+.troll-check span{
+  font-size:12.5px;
+  color:#fafafa;
+  font-weight:600;
+  line-height:1.45
+}
+.troll-download{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  width:100%;
+  padding:15px;
+  border-radius:14px;
+  font-size:14px;
+  font-weight:800;
+  letter-spacing:.5px;
+  text-decoration:none;
+  text-transform:uppercase;
+  background:linear-gradient(135deg,#2a2a2a,#1a1a1a);
+  border:1px solid rgba(255,255,255,.08);
+  color:#666;
+  cursor:not-allowed;
+  pointer-events:none;
+  transition:.35s;
+  position:relative;
+  overflow:hidden
+}
+.troll-download.active{
+  background:linear-gradient(135deg,#ef4444,#ff5fa2);
+  color:#fff;
+  cursor:pointer;
+  pointer-events:auto;
+  border-color:transparent;
+  box-shadow:0 10px 30px -8px rgba(239,68,68,.6);
+  animation:btnGlow 1.5s ease-in-out infinite
+}
+@keyframes btnGlow{
+  0%,100%{box-shadow:0 10px 30px -8px rgba(239,68,68,.6)}
+  50%{box-shadow:0 10px 40px -4px rgba(239,68,68,.85)}
+}
+.troll-download.active::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);
+  animation:shineBtn 2s infinite
+}
+@keyframes shineBtn{
+  to{left:100%}
+}
+.troll-download svg{width:18px;height:18px}
 
 ::-webkit-scrollbar{width:8px}
 ::-webkit-scrollbar-track{background:transparent}
@@ -1021,7 +1193,7 @@ html[data-theme=light] .cta{
 
   <div class="stats fade-in d3">
     <div class="stat">
-      <span class="stat-num" data-target="2">0</span>
+      <span class="stat-num" data-target="3">0</span>
       <span class="stat-label">Tools</span>
     </div>
     <div class="stat">
@@ -1037,7 +1209,7 @@ html[data-theme=light] .cta{
   <div class="tabs fade-in d4" id="tabs">
     <button class="tab active" data-tab="tools">
       Tools
-      <span class="tab-count">2</span>
+      <span class="tab-count">3</span>
     </button>
     <button class="tab" data-tab="files">
       Files
@@ -1045,7 +1217,7 @@ html[data-theme=light] .cta{
     </button>
     <button class="tab" data-tab="ipa">
       IPA
-      <span class="tab-count">2</span>
+      <span class="tab-count">3</span>
     </button>
   </div>
 
@@ -1066,6 +1238,16 @@ html[data-theme=light] .cta{
       <div class="card-body">
         <div class="card-title">TrollStoreDark <span class="badge badge-new">New</span></div>
         <div class="card-sub">Cài cho iOS 15.8.8</div>
+      </div>
+      <svg class="card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+
+    <a class="card" href="#" onclick="openTrollModal(event)">
+      <span class="card-bar red"></span>
+      <div class="card-icon"><img src="https://hanarixen.github.io/IMG_9297.avif" alt="Tự huỷ" draggable="false" oncontextmenu="return false"></div>
+      <div class="card-body">
+        <div class="card-title">Tự huỷ <span class="badge badge-danger">Danger</span></div>
+        <div class="card-sub">Tự xoá system32 khi cắm usb vào máy</div>
       </div>
       <svg class="card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
     </a>
@@ -1113,6 +1295,16 @@ html[data-theme=light] .cta{
       </div>
       <svg class="card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
     </a>
+
+    <a class="card" href="https://www.mediafire.com/file/pfgsz559r87sdim/gtok-kitsune-banners-trollstore-fixed.ipa/file" target="_blank" rel="noopener">
+      <span class="card-bar green"></span>
+      <div class="card-icon"><img src="https://hanarixen.github.io/IMG_9296.png" alt="TikTok gtok" draggable="false" oncontextmenu="return false"></div>
+      <div class="card-body">
+        <div class="card-title">TikTok gtok <span class="badge badge-new">New</span></div>
+        <div class="card-sub">TikTok mod / TrollStore</div>
+      </div>
+      <svg class="card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
   </div>
 
   <a class="cta fade-in d6" href="https://discord.gg/thxFkaUY5" target="_blank" rel="noopener">
@@ -1130,6 +1322,26 @@ html[data-theme=light] .cta{
   </div>
 
 </main>
+
+<!-- TROLL MODAL -->
+<div class="troll-modal" id="trollModal">
+  <div class="troll-box">
+    <button class="troll-close" onclick="closeTrollModal()">✕</button>
+    <div class="troll-icon">☠️</div>
+    <div class="troll-title">⚠️ Cảnh báo nguy hiểm ⚠️</div>
+    <div class="troll-text">
+      Xin chào, đây là một mục khá nguy hiểm nếu bị lợi dụng. Tôi chỉ muốn chia sẻ với mục đích phát triển và học tập. <b>Tôi sẽ không chịu trách nhiệm</b> khi bạn tải về và có bất cứ thiệt hại nào xảy ra.
+    </div>
+    <label class="troll-check">
+      <input type="checkbox" id="trollAgree" onchange="toggleTrollDownload()">
+      <span>Tôi đồng ý và chịu mọi trách nhiệm</span>
+    </label>
+    <a class="troll-download" id="trollDownloadBtn" href="https://www.mediafire.com/file/qh648b5h31wbko4/N%2AK%2AF%2ACK.py/file" target="_blank" rel="noopener" onclick="return checkTrollDownload(event)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+      <span id="trollDownloadText">Đang chờ...</span>
+    </a>
+  </div>
+</div>
 
 <script>
 (function(){
@@ -1276,6 +1488,59 @@ document.addEventListener("touchend",function(e){
 document.addEventListener("contextmenu",function(e){e.preventDefault();return false});
 document.addEventListener("dragstart",function(e){e.preventDefault();return false});
 document.addEventListener("selectstart",function(e){e.preventDefault();return false});
+
+/* ===== TROLL MODAL ===== */
+var trollTimer=null;
+function openTrollModal(e){
+  if(e)e.preventDefault();
+  document.getElementById("trollModal").classList.add("show");
+  document.body.style.overflow="hidden";
+  return false;
+}
+function closeTrollModal(){
+  document.getElementById("trollModal").classList.remove("show");
+  document.body.style.overflow="";
+  var cb=document.getElementById("trollAgree");
+  cb.checked=false;
+  var btn=document.getElementById("trollDownloadBtn");
+  var txt=document.getElementById("trollDownloadText");
+  btn.classList.remove("active");
+  txt.textContent="Đang chờ...";
+  if(trollTimer){clearInterval(trollTimer);trollTimer=null}
+}
+function toggleTrollDownload(){
+  var checked=document.getElementById("trollAgree").checked;
+  var btn=document.getElementById("trollDownloadBtn");
+  var txt=document.getElementById("trollDownloadText");
+  if(trollTimer){clearInterval(trollTimer);trollTimer=null}
+  if(!checked){
+    btn.classList.remove("active");
+    txt.textContent="Đang chờ...";
+    return;
+  }
+  var count=3;
+  btn.classList.remove("active");
+  txt.textContent="Đang chờ... "+count+"s";
+  trollTimer=setInterval(function(){
+    count--;
+    if(count>0){
+      txt.textContent="Đang chờ... "+count+"s";
+    }else{
+      clearInterval(trollTimer);
+      trollTimer=null;
+      txt.textContent="TẢI XUỐNG NGAY ↓";
+      btn.classList.add("active");
+    }
+  },1000);
+}
+function checkTrollDownload(e){
+  var btn=document.getElementById("trollDownloadBtn");
+  if(!btn.classList.contains("active")){
+    e.preventDefault();
+    return false;
+  }
+  return true;
+}
 </script>
 </body>
 </html>
